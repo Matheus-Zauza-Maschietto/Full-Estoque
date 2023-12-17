@@ -1,4 +1,11 @@
+using fullEstoque.DbContext;
+using fullEstoque.Endpoints;
+using fullEstoque.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<FullEstoqueDbContext>();
+builder.Services.AddScoped<ProdutoRepository>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,6 +42,8 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.SetProdutosEndpoint();
 
 app.Run();
 
